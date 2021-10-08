@@ -12,6 +12,7 @@
 #include <light_pcapng_ext.h>
 #include "mapping.hpp"
 #include "pcapng_exporter/can.h"
+#include "pcapng_exporter/flexray.h"
 
 namespace pcapng_exporter {
 
@@ -52,6 +53,8 @@ namespace pcapng_exporter {
 		void write_lin(frame_header header, const lin_frame frame);
 
 		void write_can(frame_header header, const canfd_frame frame);
+
+		void write_flexray(frame_header header, const flexray_frame frame);
 
 		void close();
 	};

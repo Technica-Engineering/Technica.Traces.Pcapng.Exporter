@@ -8,6 +8,7 @@
 #include "pcapng_exporter/endianness.h"
 #include "pcapng_exporter/linktype.h"
 #include "pcapng_exporter/lin.h"
+#include "pcapng_exporter/flexray.h"
 #include "pcapng_exporter/pcapng_exporter.hpp"
 #include "pcapng_exporter/mapping.hpp"
 
@@ -152,6 +153,28 @@ namespace pcapng_exporter {
 		uint8_t* ptr = (uint8_t*)&can;
 		std::vector<uint8_t> data(ptr, ptr + len);
 		this->write_frame(header, LINKTYPE_CAN, data);
+	}
+
+	void PcapngExporter::write_flexray(
+		const frame_header header,
+		const flexray_frame frame
+	)
+	{
+		const uint8_t FR_HDR_SIZE = 7;
+		uint8_t fr[FR_HDR_SIZE + 254] = { 0 };
+		fr[0] = (frame.channel << 6) | frame.type;
+		fr[1] = frame.err_flags;
+		uint64_t frh =
+			((uint64_t)frame.fr_flags << 35) |
+			((uint64_t)frame.fid << 24) |
+			((uint64_t)frame.len << 17) |
+			((uint64_t)frame.hcrc << 6) |
+			((uint64_t)frame.cc << 0);
+		((uint64_t*)(fr + 2))[0] = hton64(frh << 24);
+		size_t data_len = (size_t)frame.len * 2;
+		memcpy(fr + 7, frame.data, data_len);
+		std::vector<uint8_t> data(fr, fr + FR_HDR_SIZE + data_len);
+		this->write_frame(header, LINKTYPE_FLEXRAY, data);
 	}
 
 	void PcapngExporter::close()

@@ -13,7 +13,7 @@ target_include_directories(pcapng_exporter
 )
 target_link_libraries(pcapng_exporter
     PUBLIC
-    light_pcapng_static
+    light_pcapng
     PRIVATE
     nlohmann_json
 )
