@@ -29,8 +29,8 @@ namespace pcapng_exporter {
 	class PcapngExporter {
 	private:
 		light_pcapng file;
-		std::vector<channel_mapping> mappings;
 	public:
+		std::vector<channel_mapping> mappings;
 		PcapngExporter(std::string pcapng_file, std::string mapping_file);
 
 		void write_packet(
