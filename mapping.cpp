@@ -18,8 +18,6 @@ void merge_value(
 namespace pcapng_exporter {
 
 	std::string get_interface_name(uint32_t channel_id) {
-		channel_info info;
-		info.chl_id = channel_id;
 		std::stringstream sstream;
 		sstream << std::hex << channel_id;
 
@@ -32,6 +30,9 @@ namespace pcapng_exporter {
 
 	bool mapping_match(channel_info target, channel_info when) {
 		if (when.chl_id.has_value() && when.chl_id != target.chl_id) {
+			return false;
+		}
+		if (when.chl_link.has_value() && when.chl_link != target.chl_link) {
 			return false;
 		}
 		if (when.inf_name.has_value() && when.inf_name != target.inf_name) {
@@ -47,6 +48,7 @@ namespace pcapng_exporter {
 		// What to test against
 		channel_info target;
 		target.chl_id = channel_id;
+		target.chl_link = packet_interface.link_type;
 		target.inf_name = packet_interface.name
 			? std::optional(std::string(packet_interface.name))
 			: std::nullopt;

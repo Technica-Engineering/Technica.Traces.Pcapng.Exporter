@@ -21,6 +21,7 @@ namespace pcapng_exporter {
 
 	struct channel_info {
 		std::optional<std::uint32_t> chl_id = std::nullopt;
+		std::optional<std::uint16_t> chl_link = std::nullopt;
 		std::optional<std::string> inf_name = std::nullopt;
 		/// <summary>
 		/// possible values : undefined:: TS_UNDEFINED, Tx:: TS_OUTBOUND, Rx::TS_INBOUND
