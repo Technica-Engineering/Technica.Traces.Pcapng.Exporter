@@ -12,6 +12,7 @@
 #include <light_pcapng_ext.h>
 #include "mapping.hpp"
 #include "pcapng_exporter/can.h"
+#include "pcapng_exporter/lin.h"
 #include "pcapng_exporter/flexray.h"
 
 namespace pcapng_exporter {
