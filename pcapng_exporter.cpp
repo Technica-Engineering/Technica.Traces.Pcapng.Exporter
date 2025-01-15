@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2020-2024 Technica Engineering GmbH
+	Copyright (c) 2020-2025 Technica Engineering GmbH
 	GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 */
 #include <iostream>
@@ -166,17 +166,17 @@ namespace pcapng_exporter {
 		uint8_t frame_length;
 		if (frame.type == FR_TYPE_FRAME)
 		{
-		fr[1] = frame.err_flags;
-		uint64_t frh =
-			((uint64_t)frame.fr_flags << 35) |
-			((uint64_t)frame.fid << 24) |
-			((uint64_t)frame.len << 17) |
-			((uint64_t)frame.hcrc << 6) |
-			((uint64_t)frame.cc << 0);
-		((uint64_t*)(fr + 2))[0] = hton64(frh << 24);
-		size_t data_len = (size_t)frame.len * 2;
-		memcpy(fr + 7, frame.data, data_len);
-		frame_length = FR_HDR_SIZE + data_len;
+			fr[1] = frame.err_flags;
+			uint64_t frh =
+				((uint64_t)frame.fr_flags << 35) |
+				((uint64_t)frame.fid << 24) |
+				((uint64_t)frame.len << 17) |
+				((uint64_t)frame.hcrc << 6) |
+				((uint64_t)frame.cc << 0);
+			((uint64_t*)(fr + 2))[0] = hton64(frh << 24);
+			size_t data_len = (size_t)frame.len * 2;
+			memcpy(fr + 7, frame.data, data_len);
+			frame_length = FR_HDR_SIZE + data_len;
 		}
 		else
 		{
