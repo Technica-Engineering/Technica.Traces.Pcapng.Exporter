@@ -14,7 +14,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-          - os: windows-2019
+          - os: windows-latest
           - os: macos-latest
     steps:
     - uses: actions/checkout@v2
@@ -28,8 +28,8 @@ jobs:
         sudo apt-get install -y libpcap-dev
         
     - name: Install (windows)
-      if: matrix.os == 'windows-2019'
-      run: choco install winpcap
+      if: matrix.os == 'windows-latest'
+      run: winget install --locale DE --accept-source-agreements --accept-package-agreements win10pcap
         
     - name: Install (macos)
       if: matrix.os == 'macos-latest'
