@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-          - os: windows-latest
+          - os: ubuntu-22.04
+          - os: windows-10
           - os: macos-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
       run: git submodule update --init --recursive
 
     - name: Install (ubuntu)
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-22.04'
       run: |
         sudo apt-get update
         sudo apt-get install -y libpcap-dev
