@@ -21,20 +21,6 @@ jobs:
     - name: Checkout submodules
       run: git submodule update --init --recursive
 
-    - name: Install (ubuntu)
-      if: matrix.os == 'ubuntu-22.04'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libpcap-dev
-        
-    - name: Install (windows)
-      if: matrix.os == 'windows-latest'
-      run: echo "Is pcap even needed?"
-        
-    - name: Install (macos)
-      if: matrix.os == 'macos-latest'
-      run: brew install libpcap
-
     - name: Create Build Environment
       run: cmake -E make_directory build
 
