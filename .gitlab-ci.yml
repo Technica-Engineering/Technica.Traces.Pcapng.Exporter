@@ -18,8 +18,8 @@ windows:
 linux:
   before_script:
     - apt-get update -y
-    - apt-get install -y cmake libpcap-dev
+    - apt-get install -y libpcap-dev
   extends: .test
   tags:
     - docker
-  image: ubuntu-22.04
+  image: rikorose/gcc-cmake
