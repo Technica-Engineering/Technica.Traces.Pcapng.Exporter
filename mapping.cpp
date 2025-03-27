@@ -17,9 +17,9 @@ void merge_value(
 
 namespace pcapng_exporter {
 
-	std::string get_interface_name(uint32_t channel_id, std::string fallback) {
-		if (channel_id == 0) {
-			return fallback;
+	std::string get_interface_name(uint32_t channel_id, std::optional<std::string> fallback) {
+		if (channel_id == 0 && fallback.has_value()) {
+			return fallback.value();
 		}
 		std::stringstream sstream;
 		sstream << std::hex << channel_id;
