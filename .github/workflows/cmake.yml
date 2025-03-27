@@ -13,27 +13,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
           - os: windows-latest
           - os: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Checkout submodules
       run: git submodule update --init --recursive
-
-    - name: Install (ubuntu)
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libpcap-dev
-        
-    - name: Install (windows)
-      if: matrix.os == 'windows-latest'
-      run: choco install winpcap
-        
-    - name: Install (macos)
-      if: matrix.os == 'macos-latest'
-      run: brew install libpcap
 
     - name: Create Build Environment
       run: cmake -E make_directory build
