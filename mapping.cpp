@@ -56,6 +56,7 @@ namespace pcapng_exporter {
 		// Result
 		channel_info result;
 		result.chl_id = target.chl_id;
+		result.inf_name = target.inf_name;
 		result.pkt_dir = target.pkt_dir;
 		for (channel_mapping mapping : mappings) {
 			if (mapping_match(target, mapping.when)) {
