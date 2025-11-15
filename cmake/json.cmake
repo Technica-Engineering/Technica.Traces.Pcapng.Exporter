@@ -5,7 +5,7 @@ include(FetchContent)
 FetchContent_Declare(
   nlohmann_json
   GIT_REPOSITORY    https://github.com/nlohmann/json.git
-  GIT_TAG           03270ef
+  GIT_TAG           v3.12.0
   CMAKE_CACHE_ARGS  "-DMAIN_PROJECT:BOOL=OFF"
 )
 
