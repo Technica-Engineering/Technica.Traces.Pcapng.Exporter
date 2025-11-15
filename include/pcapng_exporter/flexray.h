@@ -36,6 +36,7 @@ struct flexray_frame
 	uint8_t cc;
 
 	uint8_t data[254];
+	uint8_t symbol_length;
 
 	flexray_frame() {
 		type = FR_TYPE_FRAME;
